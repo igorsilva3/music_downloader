@@ -11,7 +11,7 @@ class Media:
     title: str = ''
     date_published: datetime = None
     description: str = ''
-    streams: list(Stream) = []
+    streams: list[Stream] = []
     rating: float = 0.0
     views: int = 0
     thumbnail: str = ''
@@ -24,6 +24,7 @@ class Media:
         self.__get_media_info()
 
     def __get_media_info(self) -> None:
+        """ Get media info from YouTube """
         self.author = self.__youtube.author
         self.title = self.__youtube.title
         self.date_published = self.__youtube.publish_date
