@@ -2,11 +2,12 @@ import unittest
 from pathlib import Path
 
 from .downloader import Downloader
+from .env import get_env
 from .media import Media
 
 
 class TestDownloaderCase(unittest.TestCase):
-    url_video = 'https://www.youtube.com/watch?v=SivKcsEDNNY'
+    url_video = get_env('URL_VIDEO')
     media: Media
     downloader: Downloader
     
