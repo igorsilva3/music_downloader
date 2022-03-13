@@ -3,7 +3,7 @@
 
 import datetime
 
-from pytube import YouTube
+from pytube import Stream, YouTube
 
 
 class Media:
@@ -11,7 +11,7 @@ class Media:
     title: str = ''
     date_published: datetime = None
     description: str = ''
-    streams: list = []
+    streams: list(Stream) = []
     rating: float = 0.0
     views: int = 0
     thumbnail: str = ''
