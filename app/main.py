@@ -11,14 +11,18 @@ class App:
 
     def download_music(self, url: str, output_dir: Path = '') -> Path:
         output_dir = output_dir or self.output_dir
-        
-        if output_dir.exists():
-            return output_dir
-
         media = Media(url)
+        
+        file_path = Path(output_dir).joinpath(f'{media.title}.mp3')
+        
+        if file_path.exists():
+            return file_path
+        
         downloader = Downloader(media, output_dir)
-
-        return downloader.start_download()
+        
+        file_path = downloader.start_download()
+        
+        return file_path
 
     def download_musics_by_file(self, folder_name: str, file_path: Path) -> Path:
         if not file_path or not file_path.exists():
@@ -44,3 +48,4 @@ class App:
             output_dirs.append(output_path)
             
         return output_dirs
+
