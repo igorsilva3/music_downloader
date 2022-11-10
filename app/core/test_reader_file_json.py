@@ -7,7 +7,7 @@ from .reader_file_json import ReaderFileJSON
 
 class TestReaderFileJSONCase(unittest.TestCase):
     def setUp(self):
-        self.file_path = Path().cwd().joinpath('musics.json')
+        self.file_path = Path().cwd().joinpath(get_env('FILE_PATH'))
         self.folder_name = get_env('FOLDER_NAME')
         
     def test_get_content(self):
