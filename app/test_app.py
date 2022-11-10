@@ -10,6 +10,7 @@ class TestAppCase(unittest.TestCase):
         self.app = App()
         self.video_url = get_env('URL_VIDEO')
         self.file_path = Path(get_env('FILE_PATH'))
+        self.folder_name = get_env('FOLDER_NAME')
         
     def test_download_music(self):
         file_path = self.app.download_music(self.video_url)
@@ -17,18 +18,14 @@ class TestAppCase(unittest.TestCase):
         self.assertTrue(file_path.exists())
         
     def test_download_musics_by_file(self):
-        
-        folder_name = 'Guitar Hero III'
-        
-        output_dir = self.app.download_musics_by_file(folder_name, self.file_path)
+        output_dir = self.app.download_musics_by_file(self.folder_name, self.file_path)
         
         self.assertTrue(output_dir.exists())
         
     def test_download_musics_by_file_not_found(self):
-        folder_name = 'Guitar Hero III'
         file_path = get_env('FILE_PATH_NOT_FOUND')
         
-        self.assertRaises(FileNotFoundError, self.app.download_musics_by_file, folder_name, file_path)
+        self.assertRaises(FileNotFoundError, self.app.download_musics_by_file, self.folder_name, file_path)
 
     def test_download_all(self):
         output_dirs = self.app.download_all(self.file_path)

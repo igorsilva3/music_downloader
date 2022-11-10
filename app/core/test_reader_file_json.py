@@ -1,12 +1,14 @@
 import unittest
 from pathlib import Path
 
+from .env import get_env
 from .reader_file_json import ReaderFileJSON
 
 
 class TestReaderFileJSONCase(unittest.TestCase):
     def setUp(self):
         self.file_path = Path().cwd().joinpath('musics.json')
+        self.folder_name = get_env('FOLDER_NAME')
         
     def test_get_content(self):
         reader_file = ReaderFileJSON(self.file_path)
@@ -25,9 +27,7 @@ class TestReaderFileJSONCase(unittest.TestCase):
         
     def test_get_music(self):
         reader_file = ReaderFileJSON(self.file_path)
-        music = reader_file.get_music('Pagode')
-        
-        print(music)
+        music = reader_file.get_music(self.folder_name)
         
         self.assertIsInstance(music, dict)
         self.assertIsInstance(music['folder_name'], str)
