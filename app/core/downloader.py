@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from .media import Media
-
+from .sanitize import sanitize_string
 
 class Downloader():
     __media: Media
@@ -14,7 +14,7 @@ class Downloader():
 
     def start_download(self) -> Path:
         """ Return the path of the downloaded file """
-        filename = f'{self.__media.title}.{self.__type_file}'
+        filename = f'{sanitize_string(self.__media.title)}.{self.__type_file}'
         output_path: Path = self.__output_dir.joinpath(filename)
         
         self.__media.streams.get_audio_only().download(self.__output_dir, filename=filename)
